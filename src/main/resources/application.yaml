@@ -4,6 +4,8 @@ datasource:
   username: postgres
   password: postgres
   maximumPoolSize: 20
+  minimumPoolSize: 5
+  maxOpenPreparedStatements: 10
 
 cache:
   algorithm-type: LFU
