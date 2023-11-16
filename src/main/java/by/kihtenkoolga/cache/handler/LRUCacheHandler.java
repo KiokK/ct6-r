@@ -7,7 +7,7 @@ import java.util.Map;
  * Класс <code>LRUCacheHandler</code> кэширует объекты подсчитывает частоту использования каждого элемента.
  * Элемент, который не использовался в течение самого длительного времени, будет удален из кэша.
  */
-public class LRUCacheHandler<K, V> implements CacheHandler<K, V> {
+public class LRUCacheHandler<K, V> implements AlgorithmCacheHandler<K, V> {
 
     private final int CACHE_SIZE;
 

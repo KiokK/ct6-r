@@ -25,7 +25,7 @@ public class User {
     @NotBlank
     private String surname;
 
-    @Pattern(regexp="^\\s*\\+?375 (25|29|33|34)(\\d{7})", message="Invalid phone number!")
+    @Pattern(regexp="^\\s*\\+?375(25|29|33|34)(\\d{7})", message="Invalid phone number!")
     private String phone;
 
     private LocalDate createdAt;

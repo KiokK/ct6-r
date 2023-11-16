@@ -7,7 +7,7 @@ import java.util.Map;
  * Класс <code>LFUCacheHandler</code> кэширует объекты подсчитывает частоту использования каждого элемента
  * и удаляет те, к которым обращаются реже всего
  */
-public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
+public class LFUCacheHandler<K, V> implements AlgorithmCacheHandler<K, V> {
 
     /**
      * K - id объекта, V - объект, CacheValue.key - частота использования элемента V

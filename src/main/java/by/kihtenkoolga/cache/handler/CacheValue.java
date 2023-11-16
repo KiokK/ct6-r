@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Типизированный класс <code>CashValue</code> хранит в себе значение кэшированного объекта
- * используется в классах реализующих {@link CacheHandler}
+ * используется в классах реализующих {@link AlgorithmCacheHandler}
  *
  * @param <K> id объекта, который кэшируем
  * @param <V> объект, который кэшируется

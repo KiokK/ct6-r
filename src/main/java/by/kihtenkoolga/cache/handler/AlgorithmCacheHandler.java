@@ -6,7 +6,7 @@ package by.kihtenkoolga.cache.handler;
  * @param <K> ключ для поиска данных в кэше, id объекта, не null
  * @param <V> объект, который кэшируется
  */
-public interface CacheHandler<K, V> {
+public interface AlgorithmCacheHandler<K, V> {
 
     /**
      * Вставка объекта в кэш

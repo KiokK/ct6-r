@@ -1,10 +1,10 @@
 package by.kihtenkoolga.service.impl;
 
-import by.kihtenkoolga.cache.UserCacheHandler;
+import by.kihtenkoolga.cache.CacheHandler;
 import by.kihtenkoolga.dao.UserDAO;
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.exception.NullEntityIdException;
-import by.kihtenkoolga.exception.UserNotFoundException;
+import by.kihtenkoolga.exception.EntityNotFoundException;
 import by.kihtenkoolga.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,7 +47,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        UserCacheHandler.cacheHandler.clean();
+        CacheHandler.cacheHandler.clean();
     }
 
     @Nested
@@ -56,7 +57,7 @@ class UserServiceImplTest {
         void createShouldThrowException() {
             assertAll(
                     () ->
-                            assertThrows(NullPointerException.class, () -> userService.create(getEmptyUserDto())),
+                            assertThrows(ValidationException.class, () -> userService.create(getEmptyUserDto())),
                     () ->
                             assertThrows(IllegalArgumentException.class, () -> userService.create(null))
             );
@@ -167,14 +168,14 @@ class UserServiceImplTest {
         }
 
         @Test
-        void updateNoExistsUserShouldThrowUserNotFoundException() {
+        void updateNoExistsUserShouldThrowValidationException() {
             //given
             UserDto updatedUser = getUserDtoIvan();
             updatedUser.id = UUID_NO_REAL;
             updatedUser.name = NAME_EVGENI;
 
             //when//then
-            assertThrows(UserNotFoundException.class,
+            assertThrows(EntityNotFoundException.class,
                     () -> userService.update(updatedUser));
         }
 

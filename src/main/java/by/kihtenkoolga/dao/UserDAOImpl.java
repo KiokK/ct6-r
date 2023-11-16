@@ -1,7 +1,6 @@
 package by.kihtenkoolga.dao;
 
 import by.kihtenkoolga.config.DataSource;
-import by.kihtenkoolga.exception.UserNotFoundException;
 import by.kihtenkoolga.mapper.sql.UserSqlMapper;
 import by.kihtenkoolga.model.User;
 
@@ -40,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
 
             return user;
         } catch (SQLException e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
@@ -55,10 +54,11 @@ public class UserDAOImpl implements UserDAO {
             if (rs.next()) {
                 return Optional.of(sqlMapper.toEntity(rs));
             }
+
+            return Optional.empty();
         } catch (SQLException e) {
-            throw new UserNotFoundException(id);
+            throw new RuntimeException(e);
         }
-        return Optional.empty();
     }
 
     @Override
@@ -83,10 +83,13 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setString(3, String.valueOf(user.getPhone()));
             preparedStatement.setString(4, String.valueOf(user.getId()));
-            preparedStatement.executeUpdate();
-            return true;
-        } catch (SQLException e) {
+
+            if (preparedStatement.executeUpdate() == 1) {
+                return true;
+            }
             return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -99,7 +102,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            return false;
+            throw new RuntimeException(e);
         }
     }
 

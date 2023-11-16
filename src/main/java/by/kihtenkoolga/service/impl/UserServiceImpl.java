@@ -6,7 +6,7 @@ import by.kihtenkoolga.cache.proxy.PostFromCache;
 import by.kihtenkoolga.cache.proxy.PutToCache;
 import by.kihtenkoolga.dao.UserDAO;
 import by.kihtenkoolga.dto.UserDto;
-import by.kihtenkoolga.exception.UserNotFoundException;
+import by.kihtenkoolga.exception.EntityNotFoundException;
 import by.kihtenkoolga.mapper.mapstruct.UserMapper;
 import by.kihtenkoolga.model.User;
 import by.kihtenkoolga.service.UserService;
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
                 .filter(UserValidator::isUserValid)
                 .filter(userDAO::update)
                 .map(mapper::toUserDto)
-                .orElseThrow(() -> new UserNotFoundException(userDto.id));
+                .orElseThrow(() -> new EntityNotFoundException(userDto.id));
     }
 
     @Override
