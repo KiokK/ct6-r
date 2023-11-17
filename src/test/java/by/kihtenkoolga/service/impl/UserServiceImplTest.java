@@ -1,6 +1,6 @@
 package by.kihtenkoolga.service.impl;
 
-import by.kihtenkoolga.cache.CacheHandler;
+import by.kihtenkoolga.cache.CacheFactory;
 import by.kihtenkoolga.dao.UserDAO;
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.exception.NullEntityIdException;
@@ -47,7 +47,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        CacheHandler.cacheHandler.clean();
+        CacheFactory.getCacheHandler().clean();
     }
 
     @Nested

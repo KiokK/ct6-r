@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @PutToCache
     public UserDto create(UserDto userDto) {
+        UserValidator.isUserDtoValidWithoutId(userDto);
         User user = mapper.toUser(userDto);
-        UserValidator.isUserValidWithoutId(user);
         user = userDAO.create(user);
         return mapper.toUserDto(user);
     }
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @PostFromCache
     public UserDto update(UserDto userDto) {
-        return Optional.ofNullable(userDto)
+        UserValidator.isUserDtoValid(userDto);
+        return Optional.of(userDto)
                 .map(mapper::toUser)
-                .filter(UserValidator::isUserValid)
                 .filter(userDAO::update)
                 .map(mapper::toUserDto)
                 .orElseThrow(() -> new EntityNotFoundException(userDto.id));

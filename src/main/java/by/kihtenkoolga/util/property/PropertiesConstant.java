@@ -14,5 +14,6 @@ public class PropertiesConstant {
     public static final String CACHE_PROPERTY = "cache";
     public static final String CACHE_ALGORITHM_TYPE = "algorithm-type";
     public static final String CACHE_CAPACITY = "capacity";
+    public static final String CACHE_ID_FIELD_NAME = "cache-value-id-field-name";
 
 }

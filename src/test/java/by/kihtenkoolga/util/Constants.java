@@ -21,4 +21,7 @@ public class Constants {
     public static final String SURNAME_EVGENI = "Ivanov";
     public static final String PHONE_EVGENI = "+375258760039";
 
+    public static final String PHONE_INCORRECT = "+37525876";
+    public static final String EMPTY_STRING = "";
+
 }

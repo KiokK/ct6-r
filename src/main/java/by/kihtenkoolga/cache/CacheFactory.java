@@ -10,16 +10,28 @@ import java.util.Map;
 import static by.kihtenkoolga.cache.TypeOfHandler.LFU;
 import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_ALGORITHM_TYPE;
 import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_CAPACITY;
+import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_ID_FIELD_NAME;
 import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_PROPERTY;
 
-public class CacheHandler {
+public class CacheFactory {
 
-    public static final AlgorithmCacheHandler<Object, Object> cacheHandler;
+    private static final AlgorithmCacheHandler<Object, Object> cacheHandler;
+
+    private static final String ID;
+
+    public static AlgorithmCacheHandler<Object, Object> getCacheHandler() {
+        return cacheHandler;
+    }
+
+    public static String getIdFieldName() {
+        return ID;
+    }
 
     static {
         Map<String, Object> cacheProperties = new YamlApplicationProperties().getPropertiesByKey(CACHE_PROPERTY);
         String typeOfHandler = (String) cacheProperties.get(CACHE_ALGORITHM_TYPE);
         int size = (int) cacheProperties.get(CACHE_CAPACITY);
+        ID = (String) cacheProperties.get(CACHE_ID_FIELD_NAME);
 
         if (LFU.equals(TypeOfHandler.valueOf(typeOfHandler))) {
             cacheHandler = new LFUCacheHandler<>(size);

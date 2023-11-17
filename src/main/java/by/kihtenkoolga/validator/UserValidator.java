@@ -1,7 +1,7 @@
 package by.kihtenkoolga.validator;
 
+import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.exception.NullEntityIdException;
-import by.kihtenkoolga.model.User;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -13,19 +13,20 @@ import java.util.UUID;
 
 public class UserValidator {
 
+    public static final String PHONE_REGEXP = "^\\s*\\+?375(25|29|33|34)(\\d{7})";
     private static final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private static final Validator validator = validatorFactory.getValidator();
 
-    public static boolean isUserValid(User user) {
-        isUserIdValid(user.getId());
-        isUserValidWithoutId(user);
+    public static boolean isUserDtoValid(UserDto userDto) {
+        isUserIdValid(userDto.id);
+        isUserDtoValidWithoutId(userDto);
 
         return true;
     }
 
-    public static boolean isUserValidWithoutId(User user) {
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
-        if (!validator.validate(user).isEmpty()) {
+    public static boolean isUserDtoValidWithoutId(UserDto userDto) {
+        Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
+        if (!validator.validate(userDto).isEmpty()) {
             throw new ValidationException(
                     violations.stream()
                             .findAny()

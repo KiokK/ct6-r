@@ -11,6 +11,8 @@ import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import static by.kihtenkoolga.validator.UserValidator.PHONE_REGEXP;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,7 +27,7 @@ public class User {
     @NotBlank
     private String surname;
 
-    @Pattern(regexp="^\\s*\\+?375(25|29|33|34)(\\d{7})", message="Invalid phone number!")
+    @Pattern(regexp=PHONE_REGEXP, message="Invalid phone number!")
     private String phone;
 
     private LocalDate createdAt;

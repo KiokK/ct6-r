@@ -11,10 +11,10 @@ import java.io.File;
 public class XmlUtil {
 
     private static final String PATH = "src/main/resources/xml/";
-    private static File USER_DTO_IVAN = new File(PATH+"user-dto-ivan.xml");
-    private static File USER_DTO_MARINA = new File(PATH+"user-dto-marina.xml");
+    private static final File USER_DTO_IVAN = new File(PATH+"user-dto-ivan.xml");
+    private static final File USER_DTO_MARINA = new File(PATH+"user-dto-marina.xml");
 
-    public static UserDto getIvanDto() {
+    public static UserDto getIvanDtoFromXml() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(UserDto.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -25,7 +25,7 @@ public class XmlUtil {
         }
     }
 
-    public static UserDto getMarinaDto() {
+    public static UserDto getMarinaDtoFromXml() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(UserDto.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

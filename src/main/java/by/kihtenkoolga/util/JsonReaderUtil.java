@@ -13,7 +13,7 @@ public class JsonReaderUtil {
     private static final File USER_DTO_IVAN = new File(PATH+"user-dto-ivan.json");
     private static final File USER_DTO_MARINA = new File(PATH+"user-dto-marina.json");
 
-    public static UserDto getIvanDto() {
+    public static UserDto getIvanDtoFromJson() {
         try {
             return objectMapper.readValue(USER_DTO_IVAN, UserDto.class);
         } catch (IOException e) {
@@ -21,7 +21,7 @@ public class JsonReaderUtil {
         }
     }
 
-    public static UserDto getMarinaDto() {
+    public static UserDto getMarinaDtoFromJson() {
         try {
             return objectMapper.readValue(USER_DTO_MARINA, UserDto.class);
         } catch (IOException e) {
