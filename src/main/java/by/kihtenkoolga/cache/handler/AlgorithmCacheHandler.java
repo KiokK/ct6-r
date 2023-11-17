@@ -1,5 +1,7 @@
 package by.kihtenkoolga.cache.handler;
 
+import java.util.Map;
+
 /**
  * интерфейс, который реализуют обработчики кэша
  *
@@ -37,4 +39,8 @@ public interface AlgorithmCacheHandler<K, V> {
      */
     void clean();
 
+    /**
+     * @return копия коллекции объектов кэша
+     */
+    Map getCopyOfCacheData();
 }

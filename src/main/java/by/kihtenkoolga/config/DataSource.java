@@ -9,16 +9,19 @@ import java.util.Map;
 
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_DRIVER_CLASS_NAME;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PASSWORD;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PROPERTY;
+import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PROPERTY_GROUP;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_URL;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_USERNAME;
 
+/**
+ * Класс предоставляющий соединение к БД
+ */
 public class DataSource {
 
     private static Map<String, Object> dbProperties;
 
     static {
-        dbProperties = new YamlApplicationProperties().getPropertiesByKey(DB_PROPERTY);
+        dbProperties = new YamlApplicationProperties().getPropertiesByKey(DB_PROPERTY_GROUP);
     }
 
     private static final String DRIVER_CLASSNAME = (String) dbProperties.get(DB_DRIVER_CLASS_NAME);

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 
-public class JsonReaderUtil {
+public class JsonUtil {
 
     private static final String PATH = "src/main/resources/json/";
     private static final ObjectMapper objectMapper = new ObjectMapper();

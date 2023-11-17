@@ -1,6 +1,6 @@
 package by.kihtenkoolga.cache;
 
-public enum TypeOfHandler {
+public enum TypeOfCacheAlgorithm {
     LRU,
     LFU
 }

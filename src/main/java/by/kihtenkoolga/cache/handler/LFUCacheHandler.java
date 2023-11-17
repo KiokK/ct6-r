@@ -91,10 +91,14 @@ public class LFUCacheHandler<K, V> implements AlgorithmCacheHandler<K, V> {
     /**
      * @return Map копия объектов кэша, где CacheValue.key (Long) - частота использования элемента
      */
-    public Map<K, CacheValue<Long, V>> getCopyOfCacheData() {
+    @Override
+    public Map getCopyOfCacheData() {
         return Map.copyOf(cacheBase);
     }
 
+    /**
+     * Удаление всех данных из кэша
+     */
     @Override
     public void clean() {
         cacheBase.clear();

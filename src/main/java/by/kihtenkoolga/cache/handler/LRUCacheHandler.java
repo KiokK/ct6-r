@@ -57,10 +57,17 @@ public class LRUCacheHandler<K, V> implements AlgorithmCacheHandler<K, V> {
                 .getKey();
     }
 
-    public Map<K, CacheValue<K, V>> getCopyOfCacheData() {
+    /**
+     * @return Map копия объектов кэша, где CacheValue.key (Long) - частота использования элемента
+     */
+    @Override
+    public Map getCopyOfCacheData() {
         return Map.copyOf(cacheBase);
     }
 
+    /**
+     * Удаление всех данных из кэша
+     */
     @Override
     public void clean() {
         cacheBase.clear();

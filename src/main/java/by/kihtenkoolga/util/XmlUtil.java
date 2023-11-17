@@ -40,7 +40,7 @@ public class XmlUtil {
      * Выводит в консоль dto в формате xml
      * @param userDto dto, которое будет выведено
      */
-    public static void xmlFromDtoWriteToConsole(UserDto userDto) {
+    public static void writeXmlToConsole(UserDto userDto) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(UserDto.class);
             Marshaller marshaller = jaxbContext.createMarshaller();

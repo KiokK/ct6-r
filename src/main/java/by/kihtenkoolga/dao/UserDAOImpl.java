@@ -37,7 +37,11 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(4, user.getPhone());
             preparedStatement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
 
-            return user;
+            if (preparedStatement.execute()) {
+                return user;
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
