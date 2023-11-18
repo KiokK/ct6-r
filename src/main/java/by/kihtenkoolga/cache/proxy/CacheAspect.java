@@ -88,7 +88,6 @@ public class CacheAspect {
      *
      * @param joinPoint вход в метод
      * @param <K>       уникальный id кэшируемого значения
-     * @return объект из dao, который так же уже пресутствует в кэше
      * @throws Throwable если процесс выбросит исключение
      */
     @Around("@annotation(DeleteFromCache)")

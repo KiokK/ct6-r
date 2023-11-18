@@ -14,14 +14,14 @@ import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_ID_FIELD_NA
 import static by.kihtenkoolga.util.property.PropertiesConstant.CACHE_PROPERTY_GROUP;
 
 /**
- * Фабрика возвращающая инициализированный обработчик кэша
+ * Фабрика возвращающая инициализированный обработчик кэша. Создается автоматически при запуске приложения
  */
 public class CacheFactory {
 
     /**
      * Обработчик кэша
      */
-    private static final AlgorithmCacheHandler<Object, Object> cacheHandler;
+    private static AlgorithmCacheHandler<Object, Object> cacheHandler;
 
     private static final String DEFAULT_ID = "id";
 
@@ -56,6 +56,10 @@ public class CacheFactory {
         } else {
             cacheHandler = new LRUCacheHandler<>(size);
         }
+    }
+
+    public CacheFactory(AlgorithmCacheHandler<Object, Object> algorithmCacheHandler) {
+        cacheHandler = algorithmCacheHandler;
     }
 
 }
