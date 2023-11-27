@@ -29,9 +29,14 @@ ext {
     jaxbApi = '2.3.1'
     jaxbCore = '2.3.0.1'
     jaxbImpl = '2.3.3'
+    itextpdfVersion = '5.5.13'
+    xmlworkerVersion = '5.4.3'
 }
 
 dependencies {
+    implementation "com.itextpdf:itextpdf:${itextpdfVersion}"
+    implementation "com.itextpdf.tool:xmlworker:${xmlworkerVersion}"
+
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation "com.fasterxml.jackson.core:jackson-databind:${jaksonVersion}"
 
