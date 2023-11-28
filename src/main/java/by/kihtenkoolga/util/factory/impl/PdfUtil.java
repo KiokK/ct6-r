@@ -1,5 +1,6 @@
 package by.kihtenkoolga.util.factory.impl;
 
+import by.kihtenkoolga.exception.WriterException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
@@ -44,7 +45,7 @@ public class PdfUtil implements UtilWriter {
             document.close();
 
         } catch (DocumentException | IOException e) {
-            throw new RuntimeException(e);
+            throw new WriterException();
         }
     }
 

@@ -1,5 +1,7 @@
 package by.kihtenkoolga.util.factory.impl;
 
+import by.kihtenkoolga.exception.ReaderException;
+import by.kihtenkoolga.exception.WriterException;
 import by.kihtenkoolga.util.factory.UtilReader;
 import by.kihtenkoolga.util.factory.UtilWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +18,7 @@ public class JsonUtil implements UtilReader, UtilWriter {
         try {
             return objectMapper.readValue(fileInput, clazz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ReaderException();
         }
     }
 
@@ -25,7 +27,7 @@ public class JsonUtil implements UtilReader, UtilWriter {
         try {
             objectMapper.writeValue(fileOutput, object);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WriterException();
         }
     }
 }

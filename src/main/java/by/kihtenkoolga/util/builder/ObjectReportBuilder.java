@@ -12,7 +12,6 @@ public abstract class ObjectReportBuilder<B, T> {
         head = String.format("""
                 CREATION DATE: %s
                 %s
-                -------------------------------------------
                 """, new Date(), headText);;
         return (B) this;
 

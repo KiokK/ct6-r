@@ -1,7 +1,7 @@
 package by.kihtenkoolga.cache.proxy;
 
 import by.kihtenkoolga.cache.CacheFactory;
-import by.kihtenkoolga.cache.handler.LFUCacheHandler;
+import by.kihtenkoolga.cache.handler.impl.LFUCacheHandler;
 import by.kihtenkoolga.dto.UserDto;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.junit.jupiter.api.Nested;

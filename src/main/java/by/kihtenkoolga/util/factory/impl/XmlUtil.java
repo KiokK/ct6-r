@@ -1,6 +1,8 @@
 package by.kihtenkoolga.util.factory.impl;
 
 import by.kihtenkoolga.dto.UserDto;
+import by.kihtenkoolga.exception.ReaderException;
+import by.kihtenkoolga.exception.WriterException;
 import by.kihtenkoolga.util.factory.UtilReader;
 import by.kihtenkoolga.util.factory.UtilWriter;
 
@@ -14,13 +16,16 @@ public class XmlUtil implements UtilReader, UtilWriter {
 
     @Override
     public Object readObjectFromFile(Class<?> clazz, File fileInput) {
+        if (!fileInput.exists()) {
+            throw new ReaderException();
+        }
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(UserDto.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             return unmarshaller.unmarshal(fileInput);
         } catch (JAXBException e) {
-            throw new RuntimeException(e);
+            throw new ReaderException();
         }
     }
 
@@ -33,7 +38,7 @@ public class XmlUtil implements UtilReader, UtilWriter {
 
             marshaller.marshal(object, fileOutput);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            throw new WriterException();
         }
     }
 

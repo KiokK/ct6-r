@@ -1,4 +1,7 @@
-package by.kihtenkoolga.cache.handler;
+package by.kihtenkoolga.cache.handler.impl;
+
+import by.kihtenkoolga.cache.handler.AlgorithmCacheHandler;
+import by.kihtenkoolga.cache.handler.CacheValue;
 
 import java.util.HashMap;
 import java.util.Map;
