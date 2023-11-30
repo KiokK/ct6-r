@@ -30,6 +30,9 @@ public class Main {
     private static final File USER_DTO_IVAN_JSON = new File(PATH + "json/user-dto-ivan.json");
     private static final File USER_DTO_MARINA_JSON = new File(PATH + "json/user-dto-marina.json");
 
+    private static final File ANS_PDF_USERS = new File(PATH + "pdf/user-dto-users-list.pdf");
+    private static final File ANS_PDF_USER = new File(PATH + "pdf/user-dto-ivan-ans.pdf");
+
     public static void main(String[] args) {
         UserDto userIvan = (UserDto) jsonUtil.readObjectFromFile(UserDto.class, USER_DTO_IVAN_JSON);
         UserDto userMarina = (UserDto) xmlUtil.readObjectFromFile(UserDto.class, USER_DTO_MARINA_XML);
@@ -49,8 +52,8 @@ public class Main {
         String reportUser = reportBuilder.withHead("Report about one user")
                 .withBody(userIvan)
                 .build();
-        pdfUtil.writeObjectToFile(reportUsers, new File(PATH + "pdf/user-dto-users-list.pdf"));
-        pdfUtil.writeObjectToFile(reportUser, new File(PATH + "pdf/user-dto-ivan-ans.pdf"));
+        pdfUtil.writeObjectToFile(reportUsers, ANS_PDF_USERS);
+        pdfUtil.writeObjectToFile(reportUser, ANS_PDF_USER);
 //        //обновить сущность и найи ее
 //        userIvan.phone = "+375259517645";
 //        userService.update(userIvan);
