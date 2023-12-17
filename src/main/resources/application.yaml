@@ -1,0 +1,10 @@
+datasource:
+  driver-class-name: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:3254/refl-task
+  username: postgres
+  password: postgres
+
+cache:
+  algorithm-type: LFU
+  capacity: 13
+  cache-value-id-field-name: id
