@@ -1,5 +1,6 @@
 package by.kihtenkoolga.cache.handler;
 
+import by.kihtenkoolga.cache.handler.impl.LRUCacheHandler;
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.util.UserDtoTestData;
 import org.junit.jupiter.api.BeforeEach;

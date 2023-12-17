@@ -14,6 +14,25 @@
   - Assertj
   - Validation (org.glassfish.javax.el with hibernate-validator)
 
+## *Паттерны
+
+1. __Фабрика для кэшей__: [cache/handler](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler)
+    - [AlgorithmCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2FAlgorithmCacheHandler.java)
+    - Реализации:
+        - [LFUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2Fimpl%2FLFUCacheHandler.java)
+        - [LRUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2Fimpl%2FLRUCacheHandler.java)
+2. __Фабрика для чтения/вывода документов__: [factory/](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory)
+   - [UtilReader.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory%2FUtilReader.java)
+   - [UtilWriter.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory%2FUtilWriter.java)
+   - Реализации:
+     - [JsonUtil.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory%2Fimpl%2FJsonUtil.java)
+     - [PdfUtil.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory%2Fimpl%2FPdfUtil.java) - вывод в PDF
+     - [XmlUtil.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Ffactory%2Fimpl%2FXmlUtil.java)
+3. __Строитель для отчетов по dto__ [builder/](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Fbuilder)
+   - [ObjectReportBuilder.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Fbuilder%2FObjectReportBuilder.java)
+   - Реализации:
+     - [UserDtoReportBuilder.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Futil%2Fbuilder%2Fimpl%2FUserDtoReportBuilder.java)
+
 ## Подключение
 - В файле [application.yaml](src%2Fmain%2Fresources%2Fapplication.yaml) 
   - настройки подключения к БД
@@ -48,8 +67,8 @@
 - Dto: [UserDto.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fdto%2FUserDto.java)
 - [UserServiceImpl.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fservice%2Fimpl%2FUserServiceImpl.java) - сервисный слой работы с данными
 - Реализация кэша:
-  - [LFUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2FLFUCacheHandler.java)
-  - [LRUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2FLRUCacheHandler.java)
+  - [LFUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2Fimpl%2FLFUCacheHandler.java)
+  - [LRUCacheHandler.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fhandler%2Fimpl%2FLRUCacheHandler.java)
 - Аспекты в [cache/proxy/](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fproxy)
   - [CacheAspect.java](src%2Fmain%2Fjava%2Fby%2Fkihtenkoolga%2Fcache%2Fproxy%2FCacheAspect.java)
   - Post, Put, Get, Delete

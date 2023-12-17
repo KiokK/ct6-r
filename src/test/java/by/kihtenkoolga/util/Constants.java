@@ -4,6 +4,8 @@ import java.util.UUID;
 
 public class Constants {
 
+    public static final String PATH = "src/test/resources/";
+
     public static final UUID UUID_NO_REAL = UUID.fromString("f4876261-4de1-4363-9d07-d028a6f1d9f0");
 
     public static final UUID UUID_IVAN = UUID.fromString("18125567-1fda-4a48-8ff8-e6bef7bf2f70");

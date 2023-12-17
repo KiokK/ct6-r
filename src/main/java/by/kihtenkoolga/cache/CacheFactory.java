@@ -1,8 +1,8 @@
 package by.kihtenkoolga.cache;
 
 import by.kihtenkoolga.cache.handler.AlgorithmCacheHandler;
-import by.kihtenkoolga.cache.handler.LFUCacheHandler;
-import by.kihtenkoolga.cache.handler.LRUCacheHandler;
+import by.kihtenkoolga.cache.handler.impl.LFUCacheHandler;
+import by.kihtenkoolga.cache.handler.impl.LRUCacheHandler;
 import by.kihtenkoolga.util.property.YamlApplicationProperties;
 
 import java.util.Map;
