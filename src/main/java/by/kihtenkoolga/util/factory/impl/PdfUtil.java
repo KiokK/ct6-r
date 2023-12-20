@@ -22,14 +22,14 @@ import java.nio.charset.StandardCharsets;
 
 public class PdfUtil implements UtilWriter {
 
-    private final String BASE_PDF = "src/main/resources/Clevertec_Template.pdf";
+    private final String BASE_PDF = this.getClass().getResource("/Clevertec_Template.pdf").getPath();
 
     @Override
     public void writeObjectToFile(Object object, File fileOutput) {
         String htmlPage = "<html><pre>" + object.toString() + "</pre></html>";
         try {
             Document document = new Document(PageSize.A4, 50, 50, 280, 10);
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileOutput.getPath()));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileOutput.getAbsolutePath()));
             document.open();
             PdfContentByte cb = writer.getDirectContent();
 

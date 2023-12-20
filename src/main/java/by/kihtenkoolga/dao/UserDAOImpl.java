@@ -1,6 +1,7 @@
 package by.kihtenkoolga.dao;
 
 import by.kihtenkoolga.config.DataSource;
+import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.mapper.sql.UserSqlMapper;
 import by.kihtenkoolga.model.User;
 
@@ -18,7 +19,7 @@ public class UserDAOImpl implements UserDAO {
 
     private final UserSqlMapper sqlMapper = new UserSqlMapper();
 
-    private final String FIND_ALL = "SELECT * FROM users;";
+    private final String FIND_ALL = "SELECT * FROM users LIMIT ? OFFSET ?;";
     private final String FIND_BY_ID = "SELECT * from users WHERE id = (?);";
     private final String DELETE_BY_ID = "delete from users WHERE id = (?);";
     private final String INSERT_USER =
@@ -27,8 +28,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User create(User user) {
-        try {
-            Connection connection = DataSource.getConnection();
+        try (Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
             user.setId(UUID.randomUUID());
             preparedStatement.setString(1, user.getId().toString());
@@ -49,8 +49,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Optional<User> findById(UUID id) {
-        try {
-            Connection connection = DataSource.getConnection();
+        try (Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
             preparedStatement.setString(1, id.toString());
             ResultSet rs = preparedStatement.executeQuery();
@@ -66,10 +65,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> findAll() {
-        try {
-            Connection connection = DataSource.getConnection();
+    public List<User> findAll(PaginationInfo paginationInfo) {
+        try  (Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
+            preparedStatement.setInt(1, paginationInfo.getPageSize());
+            preparedStatement.setInt(2, paginationInfo.getOffset());
             ResultSet rs = preparedStatement.executeQuery();
 
             return sqlMapper.toEntityList(rs);
@@ -80,8 +80,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User user) {
-        try {
-            Connection connection = DataSource.getConnection();
+        try (Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
@@ -99,8 +98,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean deleteById(UUID id) {
-        try {
-            Connection connection = DataSource.getConnection();
+        try (Connection connection = DataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setString(1, id.toString());
             preparedStatement.executeUpdate();

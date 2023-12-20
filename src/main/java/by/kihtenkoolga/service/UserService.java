@@ -1,5 +1,6 @@
 package by.kihtenkoolga.service;
 
+import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.dto.UserDto;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface UserService {
 
     Optional<UserDto> findById(UUID id);
 
-    List<UserDto> findAll();
+    List<UserDto> findAll(PaginationInfo paginationInfo);
 
     UserDto update(UserDto userDto);
 

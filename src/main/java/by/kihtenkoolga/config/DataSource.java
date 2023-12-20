@@ -1,12 +1,14 @@
 package by.kihtenkoolga.config;
 
-import by.kihtenkoolga.util.property.YamlApplicationProperties;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
+import static by.kihtenkoolga.listener.StartContextListener.app;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_DRIVER_CLASS_NAME;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PASSWORD;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PROPERTY_GROUP;
@@ -18,20 +20,37 @@ import static by.kihtenkoolga.util.property.PropertiesConstant.DB_USERNAME;
  */
 public class DataSource {
 
+    private static HikariConfig config = new HikariConfig();
+    private static HikariDataSource ds;
     private static Map<String, Object> dbProperties;
 
     static {
-        dbProperties = new YamlApplicationProperties().getPropertiesByKey(DB_PROPERTY_GROUP);
-    }
+        dbProperties = app.getPropertiesByKey(DB_PROPERTY_GROUP);
 
-    private static final String DRIVER_CLASSNAME = (String) dbProperties.get(DB_DRIVER_CLASS_NAME);
-    private static final String URL = (String) dbProperties.get(DB_URL);
-    private static final String USERNAME = (String) dbProperties.get(DB_USERNAME);
-    private static final String PASSWORD = (String) dbProperties.get(DB_PASSWORD);
+        try {
+            String driverClassname = (String) dbProperties.get(DB_DRIVER_CLASS_NAME);
+            Class.forName(driverClassname).getDeclaredConstructor().newInstance();
+
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = (String) dbProperties.get(DB_URL);
+        String username = (String) dbProperties.get(DB_USERNAME);
+        String password = (String) dbProperties.get(DB_PASSWORD);
+
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
+        config.setMaximumPoolSize(5);
+
+       ds = new HikariDataSource(config);
+    }
 
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return ds.getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

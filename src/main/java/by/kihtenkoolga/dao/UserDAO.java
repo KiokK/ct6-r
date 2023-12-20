@@ -1,5 +1,6 @@
 package by.kihtenkoolga.dao;
 
+import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.model.User;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface UserDAO {
 
     Optional<User> findById(UUID id);
 
-    List<User> findAll();
+    List<User> findAll(PaginationInfo paginationInfo);
 
     boolean update(User user);
 

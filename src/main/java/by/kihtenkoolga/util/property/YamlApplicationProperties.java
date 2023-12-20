@@ -14,18 +14,19 @@ public class YamlApplicationProperties  {
 
     public static final String PROPERTY_FILE = "application.yaml";
 
+    {
+        InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream(PROPERTY_FILE);
+        yamlMap = new Yaml().load(inputStream);
+    }
+
     /**
      * Метод получения настроект из application.yaml по ключам группы, указанных в {@link PropertiesConstant}
      * @param groupKey ключ для определенной группы настроек
      * @return настройки для подключения
      */
     public Map<String, Object> getPropertiesByKey(String groupKey) {
-        if (yamlMap == null) {
-            InputStream inputStream = getClass()
-                    .getClassLoader()
-                    .getResourceAsStream(PROPERTY_FILE);
-            yamlMap = new Yaml().load(inputStream);
-        }
         return yamlMap.get(groupKey);
     }
 

@@ -1,12 +1,13 @@
 package by.kihtenkoolga.service.impl;
 
 import by.kihtenkoolga.cache.CacheFactory;
+import by.kihtenkoolga.cache.handler.impl.LFUCacheHandler;
+import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.dao.UserDAO;
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.exception.NullEntityIdException;
 import by.kihtenkoolga.exception.EntityNotFoundException;
 import by.kihtenkoolga.model.User;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,10 +46,7 @@ class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userService;
 
-    @BeforeEach
-    void setUp() {
-        CacheFactory.getCacheHandler().clean();
-    }
+    private CacheFactory cacheFactory = new CacheFactory(new LFUCacheHandler<>(0));
 
     @Nested
     class Create {
@@ -136,8 +134,8 @@ class UserServiceImplTest {
 
             //when
             doReturn(expectedDao)
-                    .when(userDAO).findAll();
-            List<UserDto> actual = userService.findAll();
+                    .when(userDAO).findAll(PaginationInfo.DEFAULT);
+            List<UserDto> actual = userService.findAll(PaginationInfo.DEFAULT);
 
             //then
             assertThat(actual)
