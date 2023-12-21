@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static by.kihtenkoolga.listener.StartContextListener.app;
+import static by.kihtenkoolga.listener.InitContextListener.app;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_DRIVER_CLASS_NAME;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PASSWORD;
 import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PROPERTY_GROUP;
@@ -20,12 +20,11 @@ import static by.kihtenkoolga.util.property.PropertiesConstant.DB_USERNAME;
  */
 public class DataSource {
 
-    private static HikariConfig config = new HikariConfig();
-    private static HikariDataSource ds;
-    private static Map<String, Object> dbProperties;
+    private static final HikariConfig config = new HikariConfig();
+    private static final HikariDataSource ds;
 
     static {
-        dbProperties = app.getPropertiesByKey(DB_PROPERTY_GROUP);
+        Map<String, Object> dbProperties = app.getPropertiesByKey(DB_PROPERTY_GROUP);
 
         try {
             String driverClassname = (String) dbProperties.get(DB_DRIVER_CLASS_NAME);
@@ -45,7 +44,7 @@ public class DataSource {
         config.setPassword(password);
         config.setMaximumPoolSize(5);
 
-       ds = new HikariDataSource(config);
+        ds = new HikariDataSource(config);
     }
 
     public static Connection getConnection() {

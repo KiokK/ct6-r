@@ -1,43 +1,42 @@
 package by.kihtenkoolga.controller;
 
-import by.kihtenkoolga.config.PaginationInfo;
-import by.kihtenkoolga.dao.UserDAOImpl;
-import by.kihtenkoolga.dto.UserDto;
-import by.kihtenkoolga.service.UserService;
-import by.kihtenkoolga.service.impl.UserServiceImpl;
-import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
+import static by.kihtenkoolga.command.Command.defineAndExecuteCommand;
+
+@Slf4j
 @WebServlet(value = "/users")
 public class UserServlet extends HttpServlet {
 
-    private UserService userService = new UserServiceImpl(new UserDAOImpl());
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PaginationInfo paginationInfo = PaginationInfo.DEFAULT;
-        if (!req.getParameterMap().isEmpty()) {
-            int page = Integer.parseInt(req.getParameter("pageNumber"));
-            int count = Integer.parseInt(req.getParameter("pageSize"));
-            paginationInfo = new PaginationInfo(page, count);
-        }
+        log.info("Define GET query");
+        defineAndExecuteCommand(req, resp);
+    }
 
-        List<UserDto> userDtoList = userService.findAll(paginationInfo);
-        String json = new Gson().toJson(userDtoList);
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Define POST query");
+        defineAndExecuteCommand(req, resp);
+    }
 
-        try (PrintWriter wr = resp.getWriter()) {
-            wr.write(json);
-            resp.setContentType("application/json");
-            resp.setStatus(200);
-        }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Define PUT query");
+        defineAndExecuteCommand(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Define DELETE query");
+        defineAndExecuteCommand(req, resp);
     }
 
 }

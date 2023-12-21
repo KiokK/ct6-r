@@ -20,9 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import static by.kihtenkoolga.util.FilesUtil.getFileFromResources;
+
 public class PdfUtil implements UtilWriter {
 
-    private final String BASE_PDF = this.getClass().getResource("/Clevertec_Template.pdf").getPath();
+    private final String BASE_PDF = getFileFromResources("/Clevertec_Template.pdf");
 
     @Override
     public void writeObjectToFile(Object object, File fileOutput) {
