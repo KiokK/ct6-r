@@ -25,6 +25,7 @@ public class FindByIdUserCommand implements Command {
         UUID findId;
         try {
             findId = UUID.fromString(request.getParameter(ID));
+
         } catch (NumberFormatException e) {
             response.setStatus(404);
             return;

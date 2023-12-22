@@ -5,4 +5,4 @@ create table if not exists users
     surname    varchar(30)             NOT NULL,
     phone      varchar(30)             NOT NULL,
     created_at timestamp               NOT NULL
-)
+);

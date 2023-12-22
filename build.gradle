@@ -32,13 +32,15 @@ ext {
     jaxbImpl = '2.3.3'
     itextpdfVersion = '5.5.13'
     xmlworkerVersion = '5.4.3'
+    gsonVersion = '2.10.1'
+    jakartaServletVersion = '5.0.0'
+    hikariVersion = '5.1.0'
 }
 
 dependencies {
-    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    compileOnly "jakarta.servlet:jakarta.servlet-api:${jakartaServletVersion}"
 
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.google.code.gson:gson:${gsonVersion}"
 
     implementation "com.itextpdf:itextpdf:${itextpdfVersion}"
     implementation "com.itextpdf.tool:xmlworker:${xmlworkerVersion}"
@@ -64,7 +66,7 @@ dependencies {
 
     implementation "org.aspectj:aspectjrt:${aspectjVersion}"
 
-    implementation 'com.zaxxer:HikariCP:5.1.0'
+    implementation "com.zaxxer:HikariCP:${hikariVersion}"
     implementation "org.postgresql:postgresql:${postgresqlVersion}"
 
     testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"

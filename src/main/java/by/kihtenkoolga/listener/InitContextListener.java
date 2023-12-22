@@ -11,7 +11,6 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
@@ -40,16 +39,24 @@ public class InitContextListener implements ServletContextListener {
         Boolean isInitDb = (Boolean) app.getPropertiesByKey(DB_PROPERTY_GROUP).get(DB_INIT);
 
         if (isInitDb) {
-            try (Connection connection = DataSource.getConnection()) {
-                String script = readSQLScript(getFileFromResources("/schema.sql"));
-                executeScript(connection, script);
-                script = readSQLScript(getFileFromResources("/data.sql"));
-                executeScript(connection, script);
-            } catch (SQLException | IOException e) {
-                throw new RuntimeException(e);
-            }
+            initAndExecuteDataBaseScripts();
         }
 
+        initCache();
+    }
+
+    private void initAndExecuteDataBaseScripts() {
+        try (Connection connection = DataSource.getConnection()) {
+            String script = readSQLScript(getFileFromResources("/schema.sql"));
+            executeScript(connection, script);
+            script = readSQLScript(getFileFromResources("/data.sql"));
+            executeScript(connection, script);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void initCache() {
         Map<String, Object> cacheProperties = app.getPropertiesByKey(CACHE_PROPERTY_GROUP);
         String typeOfHandler = (String) cacheProperties.get(CACHE_ALGORITHM_TYPE);
         int size = (int) cacheProperties.get(CACHE_CAPACITY);

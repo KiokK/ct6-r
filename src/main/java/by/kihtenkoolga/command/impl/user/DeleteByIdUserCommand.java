@@ -22,6 +22,7 @@ public class DeleteByIdUserCommand  implements Command {
         UUID findId;
         try {
             findId = UUID.fromString(request.getParameter(ID));
+
         } catch (IllegalArgumentException e) {
             log.info(String.format("Failed parse UUID (%s) for delete user by id", request.getParameter(ID)));
             response.setStatus(404);

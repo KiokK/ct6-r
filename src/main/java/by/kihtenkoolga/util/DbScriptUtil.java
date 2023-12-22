@@ -9,13 +9,15 @@ import java.sql.Statement;
 
 public class DbScriptUtil {
 
-    public static String readSQLScript(String filePath) throws IOException {
+    public static String readSQLScript(String filePath) {
         StringBuilder script = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 script.append(line).append("\n");
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return script.toString();
     }
