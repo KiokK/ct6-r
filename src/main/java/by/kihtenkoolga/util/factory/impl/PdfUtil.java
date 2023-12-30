@@ -20,16 +20,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import static by.kihtenkoolga.util.FilesUtil.getFileFromResources;
+
 public class PdfUtil implements UtilWriter {
 
-    private final String BASE_PDF = "src/main/resources/Clevertec_Template.pdf";
+    private final String BASE_PDF = getFileFromResources("/Clevertec_Template.pdf");
 
     @Override
     public void writeObjectToFile(Object object, File fileOutput) {
         String htmlPage = "<html><pre>" + object.toString() + "</pre></html>";
         try {
             Document document = new Document(PageSize.A4, 50, 50, 280, 10);
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileOutput.getPath()));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileOutput.getAbsolutePath()));
             document.open();
             PdfContentByte cb = writer.getDirectContent();
 

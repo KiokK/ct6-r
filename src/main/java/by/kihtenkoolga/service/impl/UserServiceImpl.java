@@ -4,6 +4,7 @@ import by.kihtenkoolga.cache.proxy.DeleteFromCache;
 import by.kihtenkoolga.cache.proxy.GetFromCache;
 import by.kihtenkoolga.cache.proxy.PostFromCache;
 import by.kihtenkoolga.cache.proxy.PutToCache;
+import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.dao.UserDAO;
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.exception.EntityNotFoundException;
@@ -42,8 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAll() {
-        return userDAO.findAll().stream()
+    public List<UserDto> findAll(PaginationInfo paginationInfo) {
+        return userDAO.findAll(paginationInfo).stream()
                 .map(mapper::toUserDto)
                 .toList();
     }
