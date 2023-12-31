@@ -2,7 +2,9 @@ package by.kihtenkoolga.util.builder.impl;
 
 import by.kihtenkoolga.dto.UserDto;
 import by.kihtenkoolga.util.builder.ObjectReportBuilder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserDtoReportBuilder extends ObjectReportBuilder<UserDtoReportBuilder, UserDto> {
 
     /**

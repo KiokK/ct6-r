@@ -2,42 +2,45 @@ package by.kihtenkoolga.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Map;
-
-import static by.kihtenkoolga.listener.InitContextListener.app;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_DRIVER_CLASS_NAME;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PASSWORD;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_PROPERTY_GROUP;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_URL;
-import static by.kihtenkoolga.util.property.PropertiesConstant.DB_USERNAME;
 
 /**
  * Класс предоставляющий соединение к БД
  */
+@Component
 public class DataSource {
 
-    private static final HikariConfig config = new HikariConfig();
-    private static final HikariDataSource ds;
+    private final HikariConfig config = new HikariConfig();
 
-    static {
-        Map<String, Object> dbProperties = app.getPropertiesByKey(DB_PROPERTY_GROUP);
+    private static HikariDataSource ds;
 
+    @Value("${datasource.driver-class-name}")
+    private String driverClassname;
+
+    @Value("${datasource.url}")
+    private String url;
+
+    @Value("${datasource.username}")
+    private String username;
+
+    @Value("${datasource.password}")
+    private String password;
+
+    @PostConstruct
+    public void initDataSource(){
         try {
-            String driverClassname = (String) dbProperties.get(DB_DRIVER_CLASS_NAME);
             Class.forName(driverClassname).getDeclaredConstructor().newInstance();
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        String url = (String) dbProperties.get(DB_URL);
-        String username = (String) dbProperties.get(DB_USERNAME);
-        String password = (String) dbProperties.get(DB_PASSWORD);
 
         config.setJdbcUrl(url);
         config.setUsername(username);

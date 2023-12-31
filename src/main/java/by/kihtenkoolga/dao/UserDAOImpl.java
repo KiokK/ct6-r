@@ -4,6 +4,8 @@ import by.kihtenkoolga.config.DataSource;
 import by.kihtenkoolga.config.PaginationInfo;
 import by.kihtenkoolga.mapper.sql.UserSqlMapper;
 import by.kihtenkoolga.model.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,9 +17,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Component
+@RequiredArgsConstructor
 public class UserDAOImpl implements UserDAO {
 
-    private final UserSqlMapper sqlMapper = new UserSqlMapper();
+    private final UserSqlMapper sqlMapper;
 
     private final String FIND_ALL = "SELECT * FROM users LIMIT ? OFFSET ?;";
     private final String FIND_BY_ID = "SELECT * from users WHERE id = (?);";

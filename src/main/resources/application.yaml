@@ -3,7 +3,9 @@ datasource:
   url: jdbc:postgresql://localhost:3254/refl-task
   username: postgres
   password: postgres
+  init-scripts: /schema.sql,/data.sql
   init-tables-with-data: true
 cache:
   algorithm-type: LFU
   capacity: 13
+  cache-field: id
