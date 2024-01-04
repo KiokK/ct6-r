@@ -74,7 +74,7 @@ public class CacheAspect {
     @Around("@annotation(PostFromCache)")
     public <K, V> Object postCache(ProceedingJoinPoint joinPoint) throws Throwable {
         V processDataResult = (V) joinPoint.proceed();
-        Field idField = processDataResult.getClass().getDeclaredField(getIdFieldName());
+        Field idField = processDataResult.getClass().getDeclaredField(CacheFactory.getIdFieldName());
         idField.setAccessible(true);
         K id = (K) idField.get(processDataResult);
 

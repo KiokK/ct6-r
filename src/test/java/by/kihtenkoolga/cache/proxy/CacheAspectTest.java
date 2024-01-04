@@ -37,7 +37,7 @@ class CacheAspectTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        cacheFactory = new CacheFactory(cacheHandler);
+        cacheFactory = new CacheFactory(cacheHandler, "id");
     }
 
     @Nested

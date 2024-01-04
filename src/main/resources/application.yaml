@@ -6,6 +6,6 @@ datasource:
   init-scripts: /schema.sql,/data.sql
   init-tables-with-data: true
 cache:
-  algorithm-type: LFU
+  algorithm-type: by.kihtenkoolga.cache.handler.impl.LRUCacheHandler
   capacity: 13
   cache-field: id
