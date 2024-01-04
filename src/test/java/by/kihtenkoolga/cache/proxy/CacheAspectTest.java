@@ -1,18 +1,18 @@
 package by.kihtenkoolga.cache.proxy;
 
 import by.kihtenkoolga.cache.CacheFactory;
-import by.kihtenkoolga.cache.handler.impl.LFUCacheHandler;
+import by.kihtenkoolga.cache.handler.AlgorithmCacheHandler;
 import by.kihtenkoolga.dto.UserDto;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static by.kihtenkoolga.util.UserDtoTestData.getUserDtoIvan;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,12 +28,17 @@ class CacheAspectTest {
     private ProceedingJoinPoint proceedingJoinPoint;
 
     @Mock
-    private LFUCacheHandler<UUID, UserDto> cacheHandler;
+    private AlgorithmCacheHandler<Object, Object> cacheHandler;
 
-    @InjectMocks
     private CacheFactory cacheFactory;
 
     private CacheAspect cacheAspect = new CacheAspect();
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        cacheFactory = new CacheFactory(cacheHandler, "id");
+    }
 
     @Nested
     class PutCache {

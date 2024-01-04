@@ -1,23 +1,25 @@
 package by.kihtenkoolga.cache;
 
 import by.kihtenkoolga.cache.handler.AlgorithmCacheHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
- * Фабрика возвращающая инициализированный обработчик кэша. Создается автоматически при запуске приложения
+ * Фабрика возвращающая инициализированный обработчик кэша
  */
+@Component
 public class CacheFactory {
+
+    /**
+     * имя поля, по которому будут кэшироваться объекты
+     */
+    private static String ID;
 
     /**
      * Обработчик кэша
      */
     private static AlgorithmCacheHandler<Object, Object> cacheHandler;
-
-    private static final String DEFAULT_ID = "id";
-
-    /**
-     * имя поля, по которому будут кэшироваться объекты
-     */
-    private static final String ID = DEFAULT_ID;
 
     /**
      * @return Обработчик кэша
@@ -26,15 +28,18 @@ public class CacheFactory {
         return cacheHandler;
     }
 
+    @Autowired
+    public CacheFactory(AlgorithmCacheHandler<Object, Object> cacheHandler,
+                        @Value("${cache.cache-field:id}") String id) {
+        ID = id;
+        this.cacheHandler = cacheHandler;
+    }
+
     /**
      * @return имя поля, по которому будут кэшироваться объекты
      */
     public static String getIdFieldName() {
         return ID;
-    }
-
-    public CacheFactory(AlgorithmCacheHandler<Object, Object> algorithmCacheHandler) {
-        cacheHandler = algorithmCacheHandler;
     }
 
 }

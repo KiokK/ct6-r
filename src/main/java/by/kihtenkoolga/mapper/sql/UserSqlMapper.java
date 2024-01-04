@@ -1,6 +1,7 @@
 package by.kihtenkoolga.mapper.sql;
 
 import by.kihtenkoolga.model.User;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import static by.kihtenkoolga.constants.EntityConstants.PHONE;
 import static by.kihtenkoolga.constants.EntityConstants.SURNAME;
 import static by.kihtenkoolga.constants.EntityConstants.USERNAME;
 
+@Component
 public class UserSqlMapper {
 
     public User toEntity(ResultSet rs) {

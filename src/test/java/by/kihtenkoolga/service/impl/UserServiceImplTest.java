@@ -46,7 +46,7 @@ class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userService;
 
-    private CacheFactory cacheFactory = new CacheFactory(new LFUCacheHandler<>(0));
+    private CacheFactory cacheFactory = new CacheFactory(new LFUCacheHandler<>(0), "id");
 
     @Nested
     class Create {

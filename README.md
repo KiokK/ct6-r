@@ -15,6 +15,7 @@
   - Assertj
   - Validation (org.glassfish.javax.el with hibernate-validator)
   - Tomcat 10.1.12
+  - Spring 6.1.2
 
 ## Подключение
 - В файле [application.yaml](src%2Fmain%2Fresources%2Fapplication.yaml) 

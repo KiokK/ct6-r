@@ -5,10 +5,12 @@ import by.kihtenkoolga.exception.WriterException;
 import by.kihtenkoolga.util.factory.UtilReader;
 import by.kihtenkoolga.util.factory.UtilWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 
+@Component
 public class JsonUtil implements UtilReader, UtilWriter {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();

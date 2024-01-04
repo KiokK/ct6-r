@@ -5,6 +5,7 @@ import by.kihtenkoolga.exception.ReaderException;
 import by.kihtenkoolga.exception.WriterException;
 import by.kihtenkoolga.util.factory.UtilReader;
 import by.kihtenkoolga.util.factory.UtilWriter;
+import org.springframework.stereotype.Component;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,6 +13,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+@Component
 public class XmlUtil implements UtilReader, UtilWriter {
 
     @Override

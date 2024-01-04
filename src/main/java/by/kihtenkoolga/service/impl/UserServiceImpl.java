@@ -14,11 +14,13 @@ import by.kihtenkoolga.service.UserService;
 import by.kihtenkoolga.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 

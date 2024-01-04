@@ -11,6 +11,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
 import by.kihtenkoolga.util.factory.UtilWriter;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -22,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 
 import static by.kihtenkoolga.util.FilesUtil.getFileFromResources;
 
+@Component
 public class PdfUtil implements UtilWriter {
 
     private final String BASE_PDF = getFileFromResources("/Clevertec_Template.pdf");
